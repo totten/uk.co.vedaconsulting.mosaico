@@ -54,10 +54,26 @@ class CRM_Mosaico_Page_Editor extends CRM_Core_Page {
    * @return array
    */
   protected function createMosaicoConfig() {
+    $mailTokens = civicrm_api3('Mailing', 'gettokens', array(
+      'entity' => array('contact', 'mailing'),
+      'sequential' => 1,
+    ));
+
     return array(
       'imgProcessorBackend' => $this->getUrl('civicrm/mosaico/img', NULL, TRUE),
       'emailProcessorBackend' => $this->getUrl('civicrm/mosaico/dl', NULL, FALSE),
       'titleToken' => 'MOSAICO Responsive Email Designer',
+      'tinymceConfig' => array(
+        'civicrmtoken' => array(
+          'tokens' => $mailTokens['values'],
+          'hotlist' => array(
+            '{contact.contact_id}',
+            '{contact.display_name}',
+            '{contact.first_name}',
+            '{contact.last_name}',
+          ),
+        ),
+      ),
       'fileuploadConfig' => array(
         'url' => $this->getUrl('civicrm/mosaico/upload', NULL, FALSE),
         // messages??
