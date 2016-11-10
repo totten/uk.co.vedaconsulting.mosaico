@@ -33,28 +33,39 @@
   </script>
   <script type="text/javascript" src="{$mosaicoDistUrl}/mosaico.min.js?v=0.15">
   </script>
-  <script type="text/javascript" src="{$mosaicoExtUrl}/js/editor.js">
-  </script>
 
   <link href="{$mosaicoDistUrl}/mosaico-material.min.css?v=0.10" rel="stylesheet" type="text/css"/>
   <link href="{$mosaicoDistUrl}/vendor/notoregular/stylesheet.css" rel="stylesheet" type="text/css"/>
 
   {literal}
   <script type="text/javascript">
-    $(function() {
-      window.CRM = window.CRM || {};
-      CRM.vars = CRM.vars || {};
-      CRM.vars.mosaico = {/literal}{$civicrmTokens}{literal};
-      addCustomButton();
-    });
     function addCustomButton() {
       if ($('#page .rightButtons').is(':visible')) {
-        $("#page .rightButtons").append('<a href="' + CRM.vars.mosaico.msgTplURL + '" class="ui-button">Done</a>');
+        $("#page .rightButtons").append('<a href="' + {/literal}{$msgTplURL|json}{literal} + '" class="ui-button">Done</a>');
       } else {
         console.log('timeout 50');
         setTimeout(addCustomButton, 50);
       }
     }
+
+    $(function() {
+      if (!Mosaico.isCompatible()) {
+        alert('Update your browser!');
+        return;
+      }
+
+      var plugins;
+      // A basic plugin that expose the "viewModel" object as a global variable.
+      // plugins = [function(vm) {window.viewModel = vm;}];
+      var ok = Mosaico.init({/literal}{$mosaicoConfig}{literal}, plugins);
+      if (!ok) {
+        console.log("Missing initialization hash, redirecting to main entrypoint");
+      }
+      else {
+        addCustomButton();
+      }
+    });
+
   </script>
   {/literal}
 </head>
