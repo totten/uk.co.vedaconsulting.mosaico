@@ -5,37 +5,13 @@
   <title>CiviCRM Mosaico</title>
   <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
 
-  <script type="text/javascript" src="{$mosaicoDistUrl}/vendor/knockout.js">
+  {foreach from=$scriptUrls item=scriptUrl}
+  <script type="text/javascript" src="{$scriptUrl|htmlspecialchars}">
   </script>
-  <script type="text/javascript" src="{$mosaicoDistUrl}/vendor/jquery.min.js">
-  </script>
-  <script type="text/javascript" src="{$mosaicoDistUrl}/vendor/jquery-ui.min.js">
-  </script>
-  <script type="text/javascript" src="{$mosaicoDistUrl}/vendor/jquery.ui.touch-punch.min.js">
-  </script>
-  <script type="text/javascript" src="{$mosaicoDistUrl}/vendor/load-image.all.min.js">
-  </script>
-  <script type="text/javascript" src="{$mosaicoDistUrl}/vendor/canvas-to-blob.min.js">
-  </script>
-  <script type="text/javascript" src="{$mosaicoDistUrl}/vendor/jquery.iframe-transport.js">
-  </script>
-  <script type="text/javascript" src="{$mosaicoDistUrl}/vendor/jquery.fileupload.js">
-  </script>
-  <script type="text/javascript" src="{$mosaicoDistUrl}/vendor/jquery.fileupload-process.js">
-  </script>
-  <script type="text/javascript" src="{$mosaicoDistUrl}/vendor/jquery.fileupload-image.js">
-  </script>
-  <script type="text/javascript" src="{$mosaicoDistUrl}/vendor/jquery.fileupload-validate.js">
-  </script>
-  <script type="text/javascript" src="{$mosaicoDistUrl}/vendor/knockout-jqueryui.min.js">
-  </script>
-  <script type="text/javascript" src="{$mosaicoDistUrl}/vendor/tinymce.min.js">
-  </script>
-  <script type="text/javascript" src="{$mosaicoDistUrl}/mosaico.min.js?v=0.15">
-  </script>
-
-  <link href="{$mosaicoDistUrl}/mosaico-material.min.css?v=0.10" rel="stylesheet" type="text/css"/>
-  <link href="{$mosaicoDistUrl}/vendor/notoregular/stylesheet.css" rel="stylesheet" type="text/css"/>
+  {/foreach}
+  {foreach from=$styleUrls item=styleUrl}
+  <link href="{$styleUrl|htmlspecialchars}" rel="stylesheet" type="text/css"/>
+  {/foreach}
 
   {literal}
   <script type="text/javascript">

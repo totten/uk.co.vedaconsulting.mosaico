@@ -5,10 +5,10 @@ class CRM_Mosaico_Page_Editor extends CRM_Core_Page {
 
   public function run() {
     $smarty = CRM_Core_Smarty::singleton();
-    $smarty->assign('mosaicoDistUrl', CRM_Mosaico_Utils::getMosaicoDistUrl('relative'));
-    $smarty->assign('mosaicoExtUrl', CRM_Core_Resources::singleton()->getUrl('uk.co.vedaconsulting.mosaico'));
+    $smarty->assign('scriptUrls', $this->getScriptUrls());
+    $smarty->assign('styleUrls', $this->getStyleUrls());
     $smarty->assign('msgTplURL', CRM_Utils_System::url('civicrm/admin/messageTemplates', 'reset=1&activeTab=mosaico'));
-    $smarty->assign_by_ref('mosaicoConfig', json_encode($this->createMosaicoConfig()));
+    $smarty->assign('mosaicoConfig', json_encode($this->createMosaicoConfig(), defined('JSON_PRETTY_PRINT') ? JSON_PRETTY_PRINT : 0));
     echo $smarty->fetch('CRM/Mosaico/Page/Editor.tpl');
     CRM_Utils_System::civiExit();
   }
@@ -50,6 +50,38 @@ class CRM_Mosaico_Page_Editor extends CRM_Core_Page {
     // This function shouldn't really exist, but it's tiring to set `$htmlize`
     // to false every.single.time we need a URL.
     return CRM_Utils_System::url($path, $query, FALSE, NULL, FALSE, $frontend);
+  }
+
+  private function getScriptUrls() {
+    $cacheCode = CRM_Core_Resources::singleton()->getCacheCode();
+    $mosaicoDistUrl = CRM_Mosaico_Utils::getMosaicoDistUrl('relative');
+    // $mosaicoExtUrl = CRM_Core_Resources::singleton()->getUrl('uk.co.vedaconsulting.mosaico');
+    return array(
+      "{$mosaicoDistUrl}/vendor/knockout.js?r={$cacheCode}",
+      "{$mosaicoDistUrl}/vendor/jquery.min.js?r={$cacheCode}",
+      "{$mosaicoDistUrl}/vendor/jquery-ui.min.js?r={$cacheCode}",
+      "{$mosaicoDistUrl}/vendor/jquery.ui.touch-punch.min.js?r={$cacheCode}",
+      "{$mosaicoDistUrl}/vendor/load-image.all.min.js?r={$cacheCode}",
+      "{$mosaicoDistUrl}/vendor/canvas-to-blob.min.js?r={$cacheCode}",
+      "{$mosaicoDistUrl}/vendor/jquery.iframe-transport.js?r={$cacheCode}",
+      "{$mosaicoDistUrl}/vendor/jquery.fileupload.js?r={$cacheCode}",
+      "{$mosaicoDistUrl}/vendor/jquery.fileupload-process.js?r={$cacheCode}",
+      "{$mosaicoDistUrl}/vendor/jquery.fileupload-image.js?r={$cacheCode}",
+      "{$mosaicoDistUrl}/vendor/jquery.fileupload-validate.js?r={$cacheCode}",
+      "{$mosaicoDistUrl}/vendor/knockout-jqueryui.min.js?r={$cacheCode}",
+      "{$mosaicoDistUrl}/vendor/tinymce.min.js?r={$cacheCode}",
+      "{$mosaicoDistUrl}/mosaico.min.js?v=0.15?&={$cacheCode}",
+    );
+  }
+
+  public function getStyleUrls() {
+    $cacheCode = CRM_Core_Resources::singleton()->getCacheCode();
+    $mosaicoDistUrl = CRM_Mosaico_Utils::getMosaicoDistUrl('relative');
+    // $mosaicoExtUrl = CRM_Core_Resources::singleton()->getUrl('uk.co.vedaconsulting.mosaico');
+    return array(
+      "{$mosaicoDistUrl}/mosaico-material.min.css?v=0.10&r={$cacheCode}",
+      "{$mosaicoDistUrl}/vendor/notoregular/stylesheet.css?r={$cacheCode}",
+    );
   }
 
 }
