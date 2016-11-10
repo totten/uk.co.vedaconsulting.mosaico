@@ -39,16 +39,17 @@
   <link href="{$mosaicoDistUrl}/mosaico-material.min.css?v=0.10" rel="stylesheet" type="text/css"/>
   <link href="{$mosaicoDistUrl}/vendor/notoregular/stylesheet.css" rel="stylesheet" type="text/css"/>
 
-  {capture assign=msgTplURL}{crmURL p='civicrm/admin/messageTemplates' q="reset=1&activeTab=mosaico"}{/capture}
   {literal}
   <script type="text/javascript">
     $(function() {
+      window.CRM = window.CRM || {};
+      CRM.vars = CRM.vars || {};
+      CRM.vars.mosaico = {/literal}{$civicrmTokens}{literal};
       addCustomButton();
     });
     function addCustomButton() {
-      var msgTplURL = "{/literal}{$msgTplURL}{literal}";
       if ($('#page .rightButtons').is(':visible')) {
-        $("#page .rightButtons").append('<a href="' + msgTplURL + '" class="ui-button">Done</a>');
+        $("#page .rightButtons").append('<a href="' + CRM.vars.mosaico.msgTplURL + '" class="ui-button">Done</a>');
       } else {
         console.log('timeout 50');
         setTimeout(addCustomButton, 50);
