@@ -4,13 +4,13 @@
     <path>civicrm/mosaico/iframe</path>
     <page_callback>CRM_Mosaico_Page_EditorIframe</page_callback>
     <title>Integration with Mosaico</title>
-    <access_arguments>access CiviCRM Mosaico</access_arguments>
+    <access_arguments>access CiviMail;create mailings;edit message templates</access_arguments>
   </item>
   <item>
     <path>civicrm/mosaico/upload</path>
     <page_callback>CRM_Mosaico_Utils::processUpload</page_callback>
     <title>Integration with Mosaico</title>
-    <access_arguments>access CiviCRM Mosaico</access_arguments>
+    <access_arguments>access CiviMail;create mailings;edit message templates</access_arguments>
   </item>
   <item>
     <path>civicrm/mosaico/img</path>
@@ -23,6 +23,6 @@
     <path>civicrm/mosaico/dl</path>
     <page_callback>CRM_Mosaico_Utils::processDl</page_callback>
     <title>Integration with Mosaico</title>
-    <access_arguments>access CiviCRM Mosaico</access_arguments>
+    <access_arguments>access CiviMail;create mailings;edit message templates</access_arguments>
   </item>
 </menu>
